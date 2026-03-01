@@ -827,15 +827,16 @@ tbody tr:hover {
     user-select: none;
     pointer-events: auto;
     animation: float-note 12s infinite ease-in-out;
-    opacity: 0.5;
+    opacity: 0.6;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s;
-    cursor: default;
+    cursor: grab;
 }
 
 .floating-note:hover {
-    transform: scale(1.3) rotate(15deg) translateY(-10px) !important;
+    transform: scale(1.4) rotate(15deg) translateY(-10px) !important;
     opacity: 1;
     z-index: 20;
+    filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.6));
 }
 
 @keyframes float-note {
@@ -856,71 +857,80 @@ tbody tr:hover {
     }
 }
 
-.brl-note {
-    background: rgba(133, 187, 101, 0.15);
-    border: 1px solid rgba(133, 187, 101, 0.4);
-    color: #a7f3d0;
-    padding: 0.6rem 1.2rem;
-    border-radius: 6px;
-    font-weight: 800;
-    font-size: 1.5rem;
-    backdrop-filter: blur(4px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    display: inline-block;
-    letter-spacing: 1px;
+.brl-money {
+    width: 250px;
+    height: 118px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
 }
 
-.brl-note.blue {
-    color: #93c5fd;
-    background: rgba(59, 130, 246, 0.15);
-    border-color: rgba(59, 130, 246, 0.4);
-}
-
-.brl-note.gold {
-    color: #fef08a;
-    background: rgba(234, 179, 8, 0.15);
-    border-color: rgba(234, 179, 8, 0.4);
-}
-
-/* Positions & Delays for Floating Notes */
-.note-1 {
-    top: 15%;
-    left: 10%;
-    animation-delay: 0s;
-    font-size: 1.1em;
-}
-
+/* Imagens reais das Cédulas do Brasil - Segunda Família */
 .note-2 {
-    top: 25%;
-    right: 15%;
-    animation-delay: 2s;
-    font-size: 1.3em;
-}
-
-.note-3 {
-    bottom: 20%;
-    left: 15%;
-    animation-delay: 4s;
-    font-size: 0.9em;
-}
-
-.note-4 {
-    bottom: 30%;
-    right: 10%;
-    animation-delay: 1s;
-    font-size: 1.2em;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/2_Brazil_real_Second_Obverse.jpg/640px-2_Brazil_real_Second_Obverse.jpg');
 }
 
 .note-5 {
-    top: 60%;
-    left: 5%;
-    animation-delay: 5s;
-    font-size: 1.4em;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/5_Brazil_real_Second_Obverse.jpg/640px-5_Brazil_real_Second_Obverse.jpg');
 }
 
-.note-6 {
-    top: 50%;
+.note-10 {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/10_Brazil_real_Second_Obverse.jpg/640px-10_Brazil_real_Second_Obverse.jpg');
+}
+
+.note-20 {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/20_Brazil_real_Second_Obverse.jpg/640px-20_Brazil_real_Second_Obverse.jpg');
+}
+
+.note-50 {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/50_Brazil_real_Second_Obverse.jpg/640px-50_Brazil_real_Second_Obverse.jpg');
+}
+
+.note-100 {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/100_Brazil_real_Second_Obverse.jpg/640px-100_Brazil_real_Second_Obverse.jpg');
+}
+
+/* Positions & Delays for Floating Notes */
+.p1 {
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+    transform: scale(0.9);
+}
+
+.p2 {
+    top: 25%;
+    right: 8%;
+    animation-delay: 2s;
+    transform: scale(0.8);
+}
+
+.p3 {
+    bottom: 15%;
+    left: 10%;
+    animation-delay: 4s;
+    transform: scale(0.85);
+}
+
+.p4 {
+    bottom: 30%;
     right: 5%;
+    animation-delay: 1s;
+    transform: scale(0.95);
+}
+
+.p5 {
+    top: 70%;
+    left: 2%;
+    animation-delay: 5s;
+    transform: scale(0.75);
+}
+
+.p6 {
+    top: 50%;
+    right: 12%;
     animation-delay: 3s;
-    font-size: 1em;
+    transform: scale(0.8);
 }
