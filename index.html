@@ -11,13 +11,65 @@
 </head>
 
 <body>
-    <div class="app-container">
-        <!-- Header -->
-        <header class="glass-panel">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fa-solid fa-wallet"></i>
-                    <h1>FinManage</h1>
+    <!-- AUTHENTICATION SCREEN -->
+    <div id="auth-container">
+        <!-- Notas flutuantes de Real -->
+        <div class="floating-note note-1">
+            <div class="brl-note">R$ 100</div>
+        </div>
+        <div class="floating-note note-2">
+            <div class="brl-note blue">R$ 2</div>
+        </div>
+        <div class="floating-note note-3">
+            <div class="brl-note gold">R$ 20</div>
+        </div>
+        <div class="floating-note note-4">
+            <div class="brl-note">R$ 50</div>
+        </div>
+        <div class="floating-note note-5">
+            <div class="brl-note blue">R$ 10</div>
+        </div>
+        <div class="floating-note note-6">
+            <div class="brl-note gold">R$ 200</div>
+        </div>
+
+        <div class="auth-box glass-panel">
+            <h2 id="auth-title">Entrar</h2>
+            <form id="auth-form">
+                <div class="form-group" style="text-align: left;">
+                    <label>E-mail</label>
+                    <input type="email" id="auth-email" required>
+                </div>
+                <div class="form-group" style="text-align: left;">
+                    <label>Senha</label>
+                    <input type="password" id="auth-password" required minlength="6">
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;"
+                    id="auth-submit-btn">Entrar</button>
+            </form>
+            <div id="auth-error" style="color: #ef4444; margin-top: 1rem; font-size: 0.9rem; display: none;">Erro ao
+                autenticar.</div>
+            <div class="auth-link" id="toggle-auth">
+                Não tem conta? <span>Registre-se</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP SCREEN -->
+    <div id="app-container" class="hidden">
+        <div class="app-container">
+            <!-- Header -->
+            <header class="glass-panel">
+                <div class="header-content">
+                    <div class="logo">
+                        <i class="fa-solid fa-wallet"></i>
+                        <h1>FinManage</h1>
+                    </div>
+                    <div class="app-header-actions" style="display: flex; gap: 1rem; align-items: center;">
+                        <button id="logout-btn" class="btn-secondary"
+                            style="padding: 0.4rem 0.8rem; font-size: 0.9rem;"><i
+                                class="fa-solid fa-right-from-bracket"></i> Sair</button>
+                    </div>
                 </div>
                 <div class="month-selector">
                     <h2 id="current-month-display">Março 2026</h2>
@@ -26,156 +78,158 @@
                         <button id="next-month" title="Próximo Mês"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                 </div>
-            </div>
-            <div class="summary-cards">
-                <div class="card income-card">
-                    <div class="card-icon"><i class="fa-solid fa-arrow-up-right-dots"></i></div>
-                    <div class="card-info">
-                        <h3>Salário / Renda base</h3>
-                        <p id="total-income">R$ 0,00</p>
+                <div class="summary-cards">
+                    <div class="card income-card">
+                        <div class="card-icon"><i class="fa-solid fa-arrow-up-right-dots"></i></div>
+                        <div class="card-info">
+                            <h3>Salário / Renda base</h3>
+                            <p id="total-income">R$ 0,00</p>
+                        </div>
+                        <button id="edit-income-btn" class="icon-btn" title="Definir Salário"><i
+                                class="fa-solid fa-pen"></i></button>
                     </div>
-                    <button id="edit-income-btn" class="icon-btn" title="Definir Salário"><i
-                            class="fa-solid fa-pen"></i></button>
-                </div>
-                <div class="card expense-card">
-                    <div class="card-icon"><i class="fa-solid fa-arrow-trend-down"></i></div>
-                    <div class="card-info">
-                        <h3>Total Gasto (Dinheiro + Cartões)</h3>
-                        <p id="total-expense">R$ 0,00</p>
+                    <div class="card expense-card">
+                        <div class="card-icon"><i class="fa-solid fa-arrow-trend-down"></i></div>
+                        <div class="card-info">
+                            <h3>Total Gasto (Dinheiro + Cartões)</h3>
+                            <p id="total-expense">R$ 0,00</p>
+                        </div>
+                    </div>
+                    <div class="card balance-card">
+                        <div class="card-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                        <div class="card-info">
+                            <h3>Saldo Caixa Restante</h3>
+                            <p id="total-balance">R$ 0,00</p>
+                        </div>
                     </div>
                 </div>
-                <div class="card balance-card">
-                    <div class="card-icon"><i class="fa-solid fa-scale-balanced"></i></div>
-                    <div class="card-info">
-                        <h3>Saldo Caixa Restante</h3>
-                        <p id="total-balance">R$ 0,00</p>
-                    </div>
-                </div>
-            </div>
-        </header>
+            </header>
 
-        <div class="tabs-container">
-            <div class="tabs glass-panel">
-                <button class="tab-btn active" data-tab="tab-overview"><i class="fa-solid fa-money-bill-transfer"></i>
-                    Conta Corrente</button>
-                <button class="tab-btn" data-tab="tab-cards"><i class="fa-solid fa-credit-card"></i> Cartões de
-                    Crédito</button>
+            <div class="tabs-container">
+                <div class="tabs glass-panel">
+                    <button class="tab-btn active" data-tab="tab-overview"><i
+                            class="fa-solid fa-money-bill-transfer"></i>
+                        Conta Corrente</button>
+                    <button class="tab-btn" data-tab="tab-cards"><i class="fa-solid fa-credit-card"></i> Cartões de
+                        Crédito</button>
+                </div>
             </div>
+
+            <main class="main-content">
+                <!-- TAB: CONTA CORRENTE -->
+                <div id="tab-overview" class="tab-content active grid-layout">
+                    <section class="glass-panel add-expense-section">
+                        <h3><i class="fa-solid fa-plus-circle"></i> Gasto à Vista</h3>
+                        <form id="expense-form">
+                            <div class="form-group">
+                                <label for="expense-desc">Descrição</label>
+                                <input type="text" id="expense-desc" placeholder="Ex: Conta de Luz" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="expense-amount">Valor (R$)</label>
+                                <input type="number" id="expense-amount" step="0.01" min="0" placeholder="0.00"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="expense-category">Categoria</label>
+                                <select id="expense-category" required>
+                                    <option value="alimentacao">🍏 Alimentação</option>
+                                    <option value="transporte">🚗 Transporte</option>
+                                    <option value="moradia">🏠 Moradia</option>
+                                    <option value="lazer">🎉 Lazer</option>
+                                    <option value="saude">💊 Saúde</option>
+                                    <option value="educacao">📚 Educação</option>
+                                    <option value="outros">🛒 Outros</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="expense-date">Data</label>
+                                <input type="date" id="expense-date" required>
+                            </div>
+                            <button type="submit" class="btn-primary">Adicionar</button>
+                        </form>
+                    </section>
+
+                    <section class="glass-panel table-section">
+                        <div class="section-header">
+                            <h3><i class="fa-solid fa-list"></i> Detalhes dos Gastos (Conta Corrente)</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="expenses-table">
+                                <thead>
+                                    <tr>
+                                        <th>Dia</th>
+                                        <th>Descrição</th>
+                                        <th>Categoria</th>
+                                        <th>Valor</th>
+                                        <th>% (Visão Geral)</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="expenses-body">
+                                    <!-- JS Injection -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="empty-state" class="empty-state hidden">
+                            <i class="fa-solid fa-receipt"></i>
+                            <p>Nenhum gasto à vista registrado neste mês.</p>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- TAB: CARTÕES -->
+                <div id="tab-cards" class="tab-content hidden">
+                    <section class="glass-panel" style="margin-bottom: 2rem;">
+                        <div class="section-header"
+                            style="display:flex; justify-content:space-between; align-items:center;">
+                            <h3><i class="fa-solid fa-credit-card"></i> Meus Cartões</h3>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end;">
+                                <button id="btn-add-card" class="btn-primary"
+                                    style="padding: 0.5rem 1rem; width: auto; font-size: 0.875rem;"><i
+                                        class="fa-solid fa-plus"></i> Cartão</button>
+                                <button id="btn-add-card-expense" class="btn-secondary"
+                                    style="padding: 0.5rem 1rem; width: auto; font-size: 0.875rem;"><i
+                                        class="fa-solid fa-cart-shopping"></i> Comprar (Parcelar)</button>
+                            </div>
+                        </div>
+
+                        <div id="cards-grid" class="cards-grid">
+                            <!-- JS Injection for Cards Overview -->
+                        </div>
+                    </section>
+
+                    <section class="glass-panel table-section">
+                        <div class="section-header">
+                            <h3><i class="fa-solid fa-file-invoice-dollar"></i> Faturas deste mês (<span
+                                    id="invoice-month-display"></span>)</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="card-expenses-table">
+                                <thead>
+                                    <tr>
+                                        <th>Cartão</th>
+                                        <th>Data Compra</th>
+                                        <th>Descrição</th>
+                                        <th>Parcela</th>
+                                        <th>Valor (Mês)</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="card-expenses-body">
+                                    <!-- JS Injection -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="empty-cards-state" class="empty-state hidden">
+                            <i class="fa-solid fa-receipt"></i>
+                            <p>Nenhuma parcela a pagar neste mês.</p>
+                        </div>
+                    </section>
+                </div>
+            </main>
         </div>
-
-        <main class="main-content">
-            <!-- TAB: CONTA CORRENTE -->
-            <div id="tab-overview" class="tab-content active grid-layout">
-                <section class="glass-panel add-expense-section">
-                    <h3><i class="fa-solid fa-plus-circle"></i> Gasto à Vista</h3>
-                    <form id="expense-form">
-                        <div class="form-group">
-                            <label for="expense-desc">Descrição</label>
-                            <input type="text" id="expense-desc" placeholder="Ex: Conta de Luz" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="expense-amount">Valor (R$)</label>
-                            <input type="number" id="expense-amount" step="0.01" min="0" placeholder="0.00" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="expense-category">Categoria</label>
-                            <select id="expense-category" required>
-                                <option value="alimentacao">🍏 Alimentação</option>
-                                <option value="transporte">🚗 Transporte</option>
-                                <option value="moradia">🏠 Moradia</option>
-                                <option value="lazer">🎉 Lazer</option>
-                                <option value="saude">💊 Saúde</option>
-                                <option value="educacao">📚 Educação</option>
-                                <option value="outros">🛒 Outros</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="expense-date">Data</label>
-                            <input type="date" id="expense-date" required>
-                        </div>
-                        <button type="submit" class="btn-primary">Adicionar</button>
-                    </form>
-                </section>
-
-                <section class="glass-panel table-section">
-                    <div class="section-header">
-                        <h3><i class="fa-solid fa-list"></i> Detalhes dos Gastos (Conta Corrente)</h3>
-                    </div>
-                    <div class="table-responsive">
-                        <table id="expenses-table">
-                            <thead>
-                                <tr>
-                                    <th>Dia</th>
-                                    <th>Descrição</th>
-                                    <th>Categoria</th>
-                                    <th>Valor</th>
-                                    <th>% (Visão Geral)</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody id="expenses-body">
-                                <!-- JS Injection -->
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="empty-state" class="empty-state hidden">
-                        <i class="fa-solid fa-receipt"></i>
-                        <p>Nenhum gasto à vista registrado neste mês.</p>
-                    </div>
-                </section>
-            </div>
-
-            <!-- TAB: CARTÕES -->
-            <div id="tab-cards" class="tab-content hidden">
-                <section class="glass-panel" style="margin-bottom: 2rem;">
-                    <div class="section-header"
-                        style="display:flex; justify-content:space-between; align-items:center;">
-                        <h3><i class="fa-solid fa-credit-card"></i> Meus Cartões</h3>
-                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end;">
-                            <button id="btn-add-card" class="btn-primary"
-                                style="padding: 0.5rem 1rem; width: auto; font-size: 0.875rem;"><i
-                                    class="fa-solid fa-plus"></i> Cartão</button>
-                            <button id="btn-add-card-expense" class="btn-secondary"
-                                style="padding: 0.5rem 1rem; width: auto; font-size: 0.875rem;"><i
-                                    class="fa-solid fa-cart-shopping"></i> Comprar (Parcelar)</button>
-                        </div>
-                    </div>
-
-                    <div id="cards-grid" class="cards-grid">
-                        <!-- JS Injection for Cards Overview -->
-                    </div>
-                </section>
-
-                <section class="glass-panel table-section">
-                    <div class="section-header">
-                        <h3><i class="fa-solid fa-file-invoice-dollar"></i> Faturas deste mês (<span
-                                id="invoice-month-display"></span>)</h3>
-                    </div>
-                    <div class="table-responsive">
-                        <table id="card-expenses-table">
-                            <thead>
-                                <tr>
-                                    <th>Cartão</th>
-                                    <th>Data Compra</th>
-                                    <th>Descrição</th>
-                                    <th>Parcela</th>
-                                    <th>Valor (Mês)</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody id="card-expenses-body">
-                                <!-- JS Injection -->
-                            </tbody>
-                        </table>
-                    </div>
-                    <div id="empty-cards-state" class="empty-state hidden">
-                        <i class="fa-solid fa-receipt"></i>
-                        <p>Nenhuma parcela a pagar neste mês.</p>
-                    </div>
-                </section>
-            </div>
-        </main>
-    </div>
+    </div> <!-- END app-container -->
 
     <!-- Modals -->
 
@@ -283,6 +337,7 @@
 
     <!-- Firebase SDK (Bibliotecas Vanilla via CDN) -->
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
 
     <script src="app.js"></script>

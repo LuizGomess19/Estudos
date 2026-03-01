@@ -770,3 +770,157 @@ tbody tr:hover {
 .bank-outros {
     background: linear-gradient(135deg, #475569, #1e293b);
 }
+
+/* --------------- AUTH SCREEN --------------- */
+#auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 50;
+}
+
+.auth-box {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 400px;
+    padding: 2.5rem;
+    text-align: center;
+    background: rgba(17, 24, 39, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.auth-box h2 {
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 2rem;
+}
+
+.auth-link {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.auth-link span {
+    color: var(--primary);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.auth-link span:hover {
+    color: var(--secondary);
+    text-shadow: 0 0 8px var(--primary-glow);
+}
+
+/* --------------- FLOATING NOTES ANIMATION --------------- */
+.floating-note {
+    position: absolute;
+    user-select: none;
+    pointer-events: auto;
+    animation: float-note 12s infinite ease-in-out;
+    opacity: 0.5;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s;
+    cursor: default;
+}
+
+.floating-note:hover {
+    transform: scale(1.3) rotate(15deg) translateY(-10px) !important;
+    opacity: 1;
+    z-index: 20;
+}
+
+@keyframes float-note {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    33% {
+        transform: translateY(-30px) rotate(10deg);
+    }
+
+    66% {
+        transform: translateY(15px) rotate(-5deg);
+    }
+
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+.brl-note {
+    background: rgba(133, 187, 101, 0.15);
+    border: 1px solid rgba(133, 187, 101, 0.4);
+    color: #a7f3d0;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 1.5rem;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    letter-spacing: 1px;
+}
+
+.brl-note.blue {
+    color: #93c5fd;
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+.brl-note.gold {
+    color: #fef08a;
+    background: rgba(234, 179, 8, 0.15);
+    border-color: rgba(234, 179, 8, 0.4);
+}
+
+/* Positions & Delays for Floating Notes */
+.note-1 {
+    top: 15%;
+    left: 10%;
+    animation-delay: 0s;
+    font-size: 1.1em;
+}
+
+.note-2 {
+    top: 25%;
+    right: 15%;
+    animation-delay: 2s;
+    font-size: 1.3em;
+}
+
+.note-3 {
+    bottom: 20%;
+    left: 15%;
+    animation-delay: 4s;
+    font-size: 0.9em;
+}
+
+.note-4 {
+    bottom: 30%;
+    right: 10%;
+    animation-delay: 1s;
+    font-size: 1.2em;
+}
+
+.note-5 {
+    top: 60%;
+    left: 5%;
+    animation-delay: 5s;
+    font-size: 1.4em;
+}
+
+.note-6 {
+    top: 50%;
+    right: 5%;
+    animation-delay: 3s;
+    font-size: 1em;
+}

@@ -20,30 +20,78 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
+const auth = firebase.auth();
 
-// Sincronizar em Tempo Real na Nuvem
-database.ref('/').on('value', (snapshot) => {
-    const data = snapshot.val();
-    if (data) {
-        expenses = data.expenses || [];
-        cards = data.cards || [];
-        cardExpenses = data.cardExpenses || [];
-        incomes = data.incomes || {};
-        defaultIncome = parseFloat(data.defaultIncome) || 0;
+let currentUser = null;
+let currentDbRef = null;
+let isLoginMode = true;
 
-        // Backup local extra
-        localStorage.setItem('expenses', JSON.stringify(expenses));
-        localStorage.setItem('cards', JSON.stringify(cards));
-        localStorage.setItem('cardExpenses', JSON.stringify(cardExpenses));
-        localStorage.setItem('incomes', JSON.stringify(incomes));
-        localStorage.setItem('defaultIncome', defaultIncome.toString());
+// Handle Auth State Changes
+auth.onAuthStateChanged((user) => {
+    const authContainer = document.getElementById('auth-container');
+    const appContainer = document.getElementById('app-container');
 
-        render(); // Atualiza a tela a cada alteração da nuvem
+    if (user) {
+        currentUser = user;
+        authContainer.classList.add('hidden');
+        appContainer.classList.remove('hidden');
+
+        // Sincronizar dados do Firebase para este usuário específico
+        if (currentDbRef) currentDbRef.off();
+        currentDbRef = database.ref('/users/' + user.uid);
+
+        currentDbRef.on('value', (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                expenses = data.expenses || [];
+                cards = data.cards || [];
+                cardExpenses = data.cardExpenses || [];
+                incomes = data.incomes || {};
+                defaultIncome = parseFloat(data.defaultIncome) || 0;
+
+                // Backup local extra
+                localStorage.setItem('expenses', JSON.stringify(expenses));
+                localStorage.setItem('cards', JSON.stringify(cards));
+                localStorage.setItem('cardExpenses', JSON.stringify(cardExpenses));
+                localStorage.setItem('incomes', JSON.stringify(incomes));
+                localStorage.setItem('defaultIncome', defaultIncome.toString());
+
+                render();
+            } else {
+                // Primeira vez do usuário, se houver dado local, envia para a nuvem
+                if (expenses.length > 0 || cards.length > 0 || defaultIncome > 0 || cardExpenses.length > 0) {
+                    saveData();
+                } else {
+                    render();
+                }
+            }
+        });
     } else {
-        // Nuvem vazia pela primeira vez, faz o envio inicial
-        if (expenses.length > 0 || cards.length > 0 || defaultIncome > 0 || cardExpenses.length > 0) {
-            saveData();
+        // Deslogado
+        currentUser = null;
+        if (currentDbRef) {
+            currentDbRef.off();
+            currentDbRef = null;
         }
+
+        authContainer.classList.remove('hidden');
+        appContainer.classList.add('hidden');
+
+        // Limpar dados locais da memória temporária ao sair
+        expenses = [];
+        cards = [];
+        cardExpenses = [];
+        incomes = {};
+        defaultIncome = 0;
+        localStorage.clear();
+
+        // Resetar interface manual para evitar vazamentos
+        document.getElementById('total-income').textContent = 'R$ 0,00';
+        document.getElementById('total-expense').textContent = 'R$ 0,00';
+        document.getElementById('total-balance').textContent = 'R$ 0,00';
+        document.getElementById('expenses-body').innerHTML = '';
+        document.getElementById('cards-grid').innerHTML = '';
+        document.getElementById('card-expenses-body').innerHTML = '';
     }
 });
 // -----------------------------------
@@ -100,6 +148,39 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', (e) => {
             e.target.closest('.modal').classList.add('hidden');
         });
+    });
+
+    // Auth Listeners
+    document.getElementById('toggle-auth').addEventListener('click', () => {
+        isLoginMode = !isLoginMode;
+        document.getElementById('auth-title').textContent = isLoginMode ? 'Entrar' : 'Cadastrar';
+        document.getElementById('auth-submit-btn').textContent = isLoginMode ? 'Entrar' : 'Cadastrar';
+        document.querySelector('#toggle-auth span').textContent = isLoginMode ? 'Registre-se' : 'Faça Login';
+        document.getElementById('auth-error').style.display = 'none';
+    });
+
+    document.getElementById('auth-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('auth-email').value;
+        const pass = document.getElementById('auth-password').value;
+        const errorDiv = document.getElementById('auth-error');
+        errorDiv.style.display = 'none';
+
+        if (isLoginMode) {
+            auth.signInWithEmailAndPassword(email, pass).catch(err => {
+                errorDiv.textContent = 'Erro ao entrar. E-mail ou senha incorretos.';
+                errorDiv.style.display = 'block';
+            });
+        } else {
+            auth.createUserWithEmailAndPassword(email, pass).catch(err => {
+                errorDiv.textContent = 'Erro ao cadastrar: ' + err.message;
+                errorDiv.style.display = 'block';
+            });
+        }
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', () => {
+        auth.signOut();
     });
 
     // Initialize Interactive Background
@@ -166,14 +247,16 @@ function saveData() {
     localStorage.setItem('incomes', JSON.stringify(incomes));
     localStorage.setItem('defaultIncome', defaultIncome.toString());
 
-    // Salvar na Nuvem (Firebase)
-    database.ref('/').set({
-        expenses: expenses,
-        cards: cards,
-        cardExpenses: cardExpenses,
-        incomes: incomes,
-        defaultIncome: defaultIncome
-    });
+    // Salvar na Nuvem (Firebase) separado por Usuário logado
+    if (currentUser) {
+        database.ref('/users/' + currentUser.uid).set({
+            expenses: expenses,
+            cards: cards,
+            cardExpenses: cardExpenses,
+            incomes: incomes,
+            defaultIncome: defaultIncome
+        });
+    }
 }
 
 // ---------------- INCOMES -----------------
