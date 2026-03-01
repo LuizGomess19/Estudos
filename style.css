@@ -860,36 +860,37 @@ tbody tr:hover {
 .brl-money {
     width: 250px;
     height: 118px;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     background-position: center;
-    border-radius: 4px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     transition: all 0.3s;
 }
 
-/* Imagens reais das Cédulas do Brasil - Segunda Família */
+/* Imagens reais das Cédulas do Brasil - Primeira Família (antigas, barra lateral) */
 .note-2 {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/2_Brazil_real_Second_Obverse.jpg/640px-2_Brazil_real_Second_Obverse.jpg');
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/c4/2_Brazil_real_First_Obverse.jpg');
 }
 
 .note-5 {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/5_Brazil_real_Second_Obverse.jpg/640px-5_Brazil_real_Second_Obverse.jpg');
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a0/5_Brazil_real_First_Obverse.jpg');
 }
 
 .note-10 {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/10_Brazil_real_Second_Obverse.jpg/640px-10_Brazil_real_Second_Obverse.jpg');
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/1/19/10_Brazil_real_First_Obverse.jpg');
 }
 
 .note-20 {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/20_Brazil_real_Second_Obverse.jpg/640px-20_Brazil_real_Second_Obverse.jpg');
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/e9/20_Brazil_real_First_Obverse.jpg');
 }
 
 .note-50 {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/50_Brazil_real_Second_Obverse.jpg/640px-50_Brazil_real_Second_Obverse.jpg');
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a5/50_Brazil_real_First_Obverse.jpg');
 }
 
 .note-100 {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/100_Brazil_real_Second_Obverse.jpg/640px-100_Brazil_real_Second_Obverse.jpg');
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/f/fb/100_Brazil_real_First_Obverse.jpg');
 }
 
 /* Positions & Delays for Floating Notes */
