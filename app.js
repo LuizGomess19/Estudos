@@ -629,8 +629,6 @@ function initInteractiveBackground() {
     function animate() {
         ctx.clearRect(0, 0, width, height);
 
-        ctx.fillStyle = 'rgba(99, 102, 241, 0.5)';
-
         particles.forEach(p => {
             // Move
             p.x += p.vx;
@@ -648,22 +646,30 @@ function initInteractiveBackground() {
             const dist = Math.sqrt(dx * dx + dy * dy);
 
             let alpha = p.baseAlpha;
-            if (dist < 150) {
-                alpha += (150 - dist) / 150 * 0.8;
+            if (dist < 180) {
+                alpha += (180 - dist) / 180 * 0.9;
 
-                // Draw lines to mouse
+                // Cyberpunk data lines connecting to mouse
                 ctx.beginPath();
                 ctx.moveTo(p.x, p.y);
+                // Draw rigid/tech-looking angled lines rather than direct straight lines
+                // or just straight sharp lines with neon color
                 ctx.lineTo(mouse.x, mouse.y);
-                ctx.strokeStyle = `rgba(99, 102, 241, ${((150 - dist) / 150) * 0.2})`;
-                ctx.lineWidth = 1;
+                ctx.strokeStyle = `rgba(0, 240, 255, ${((180 - dist) / 180) * 0.4})`;
+                ctx.lineWidth = 1.5;
                 ctx.stroke();
             }
 
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(167, 139, 250, ${alpha})`;
-            ctx.fill();
+            // Draw tech elements (small squares/nodes) instead of circles
+            ctx.fillStyle = `rgba(188, 19, 254, ${alpha})`;
+            if (p.radius > 2) {
+                // Draw a cross/target node for larger particles
+                ctx.fillRect(p.x - p.radius, p.y - 1, p.radius * 2, 2);
+                ctx.fillRect(p.x - 1, p.y - p.radius, 2, p.radius * 2);
+            } else {
+                // Draw standard square data node
+                ctx.fillRect(p.x - p.radius, p.y - p.radius, p.radius * 2, p.radius * 2);
+            }
         });
 
         requestAnimationFrame(animate);
