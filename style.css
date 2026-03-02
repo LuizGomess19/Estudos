@@ -1,20 +1,22 @@
 :root {
-    --bg-color: #0b1120;
-    --bg-gradient: radial-gradient(circle at top right, #1e1b4b, #0f172a 60%, #020617 100%);
-    --card-bg: rgba(15, 23, 42, 0.4);
-    --card-border: rgba(255, 255, 255, 0.08);
-    --card-blur: 16px;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --primary: #6366f1;
-    --primary-hover: #4f46e5;
-    --primary-glow: rgba(99, 102, 241, 0.5);
-    --danger: #ef4444;
-    --danger-hover: #dc2626;
-    --success: #10b981;
-    --warning: #f59e0b;
-    --border-radius: 20px;
-    --btn-radius: 12px;
+    --bg-color: #050505;
+    --bg-gradient: radial-gradient(circle at 50% 0%, #1a0b2e, #0a0a0f 60%, #000000 100%);
+    --card-bg: rgba(10, 10, 15, 0.6);
+    --card-border: rgba(0, 240, 255, 0.2);
+    --card-blur: 20px;
+    --text-main: #e2e8f0;
+    --text-muted: #8b9bb4;
+    --primary: #00f0ff;
+    --primary-hover: #00c3ff;
+    --primary-glow: rgba(0, 240, 255, 0.6);
+    --secondary: #bc13fe;
+    --secondary-glow: rgba(188, 19, 254, 0.6);
+    --danger: #ff003c;
+    --danger-hover: #cc0030;
+    --success: #00ff66;
+    --warning: #ffeb3b;
+    --border-radius: 12px;
+    --btn-radius: 6px;
 }
 
 * {
@@ -26,7 +28,11 @@
 body {
     font-family: 'Inter', sans-serif;
     background: var(--bg-color);
-    background-image: var(--bg-gradient);
+    background-image:
+        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        var(--bg-gradient);
+    background-size: 30px 30px, 30px 30px, 100% 100%;
     background-attachment: fixed;
     color: var(--text-main);
     min-height: 100vh;
@@ -62,13 +68,13 @@ body {
     border: 1px solid var(--card-border);
     border-radius: var(--border-radius);
     padding: 1.5rem;
-    box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(0, 240, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-panel:hover {
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 10px 40px -5px rgba(0, 0, 0, 0.4);
+    border-color: rgba(0, 240, 255, 0.5);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.15), inset 0 0 15px rgba(0, 240, 255, 0.1);
 }
 
 .header-content {
@@ -90,12 +96,12 @@ body {
     font-family: 'Outfit', sans-serif;
     font-weight: 800;
     font-size: 1.8rem;
-    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.5px;
-    text-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+    text-shadow: 0 0 10px var(--primary-glow);
 }
 
 .month-selector {
@@ -147,12 +153,12 @@ body {
     display: flex;
     align-items: center;
     padding: 1.5rem;
-    border-radius: 16px;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+    border-radius: var(--border-radius);
+    background: linear-gradient(135deg, rgba(20, 20, 30, 0.8), rgba(5, 5, 10, 0.9));
     border: 1px solid var(--card-border);
     position: relative;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     overflow: hidden;
 }
 
@@ -163,7 +169,7 @@ body {
     left: -100%;
     width: 50%;
     height: 100%;
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.05), transparent);
+    background: linear-gradient(to right, transparent, rgba(0, 240, 255, 0.1), transparent);
     transform: skewX(-20deg);
     transition: 0.5s;
     pointer-events: none;
@@ -175,7 +181,8 @@ body {
 
 .card:hover {
     transform: translateY(-4px) scale(1.02);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 15px 30px -5px rgba(0, 0, 0, 0.4);
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px var(--primary-glow);
 }
 
 .card-icon {
@@ -282,13 +289,15 @@ body {
 }
 
 .tab-btn.active {
-    color: white;
-    background: rgba(99, 102, 241, 0.15);
-    box-shadow: inset 0 0 20px rgba(99, 102, 241, 0.05);
+    color: var(--primary);
+    background: rgba(0, 240, 255, 0.1);
+    box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.1);
+    text-shadow: 0 0 8px var(--primary-glow);
 }
 
 .tab-btn.active::after {
     width: 80%;
+    box-shadow: 0 -2px 10px var(--primary-glow);
 }
 
 .tab-content {
@@ -374,25 +383,30 @@ body {
 .btn-primary {
     width: 100%;
     padding: 0.875rem;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 240, 255, 0.1);
+    color: var(--primary);
+    border: 1px solid var(--primary);
     border-radius: var(--btn-radius);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 15px var(--primary-glow);
+    box-shadow: 0 0 10px var(--primary-glow), inset 0 0 5px var(--primary-glow);
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-primary:hover {
+    background: var(--primary);
+    color: #000;
+    box-shadow: 0 0 25px var(--primary-glow), inset 0 0 10px rgba(255, 255, 255, 0.5);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px var(--primary-glow);
-    filter: brightness(1.1);
 }
 
 .btn-primary:active {
@@ -592,7 +606,7 @@ tbody tr:hover {
 
 .credit-card {
     height: 190px;
-    border-radius: 20px;
+    border-radius: var(--border-radius);
     padding: 1.5rem 1.8rem;
     color: white;
     display: flex;
@@ -600,14 +614,16 @@ tbody tr:hover {
     justify-content: space-between;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     transform-style: preserve-3d;
 }
 
 .credit-card:hover {
-    transform: translateY(-10px) rotateX(5deg) rotateY(-5deg);
-    box-shadow: 0 25px 45px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transform: translateY(-10px) rotateX(5deg) rotateY(-5deg) scale(1.05);
+    box-shadow: 0 0 30px var(--primary-glow), inset 0 0 20px rgba(255, 255, 255, 0.3);
+    border-color: var(--primary);
 }
 
 /* Glare Effect / Specular shine */
