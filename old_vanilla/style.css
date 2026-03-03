@@ -799,6 +799,659 @@ tbody tr:hover {
     background: linear-gradient(135deg, #475569, #1e293b);
 }
 
+/* ===============================================
+   THEME SYSTEM — Color + Layout Variations
+   =============================================== */
+
+/* ---------- THEME: Clássico Claro ---------- */
+[data-theme="light"] {
+    --bg-color: #f0f2f5;
+    --bg-gradient: linear-gradient(135deg, #e8edf5 0%, #f0f2f5 50%, #e4e9f2 100%);
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --card-border: rgba(0, 0, 0, 0.08);
+    --card-blur: 12px;
+    --text-main: #1a202c;
+    --text-muted: #64748b;
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --primary-glow: rgba(59, 130, 246, 0.3);
+    --secondary: #8b5cf6;
+    --secondary-glow: rgba(139, 92, 246, 0.3);
+    --danger: #ef4444;
+    --danger-hover: #dc2626;
+    --success: #22c55e;
+    --warning: #f59e0b;
+}
+
+[data-theme="light"] body {
+    background: var(--bg-color);
+    background-image: none;
+    color: var(--text-main);
+}
+
+[data-theme="light"] .glass-panel {
+    background: var(--card-bg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--card-border);
+}
+
+[data-theme="light"] .glass-panel:hover {
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08);
+}
+
+[data-theme="light"] .card {
+    background: linear-gradient(135deg, #ffffff, #f8fafc);
+    border-color: var(--card-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .card::before {
+    background: linear-gradient(to right, transparent, rgba(59, 130, 246, 0.06), transparent);
+}
+
+[data-theme="light"] .card:hover {
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.12);
+    border-color: var(--primary);
+}
+
+[data-theme="light"] .form-group input,
+[data-theme="light"] .form-group select {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+    color: var(--text-main);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .form-group input:focus,
+[data-theme="light"] .form-group select:focus {
+    background: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+[data-theme="light"] .btn-primary {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
+}
+
+[data-theme="light"] .btn-primary:hover {
+    background: var(--primary-hover);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
+}
+
+[data-theme="light"] .btn-secondary {
+    background: #f1f5f9;
+    color: var(--text-main);
+    border-color: #e2e8f0;
+}
+
+[data-theme="light"] .btn-secondary:hover {
+    background: #e2e8f0;
+}
+
+[data-theme="light"] .tab-btn {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .tab-btn:hover {
+    background: rgba(59, 130, 246, 0.06);
+    color: var(--text-main);
+}
+
+[data-theme="light"] .tab-btn.active {
+    color: var(--primary);
+    background: rgba(59, 130, 246, 0.08);
+    box-shadow: none;
+    text-shadow: none;
+}
+
+[data-theme="light"] .tab-btn.active::after {
+    box-shadow: none;
+}
+
+[data-theme="light"] .month-nav-buttons button {
+    background: #f1f5f9;
+    border-color: #e2e8f0;
+    color: var(--text-main);
+}
+
+[data-theme="light"] .month-nav-buttons button:hover {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="light"] tbody tr:hover {
+    background: rgba(59, 130, 246, 0.04);
+}
+
+[data-theme="light"] th {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] th,
+[data-theme="light"] td {
+    border-bottom-color: #e2e8f0;
+}
+
+[data-theme="light"] .modal {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .auth-box {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .icon-btn {
+    background: #f1f5f9;
+    border-color: #e2e8f0;
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .icon-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+[data-theme="light"] .empty-state {
+    background: rgba(59, 130, 246, 0.03);
+}
+
+[data-theme="light"] .action-btn {
+    background: rgba(239, 68, 68, 0.06);
+}
+
+/* ---------- THEME: Midnight Blue ---------- */
+[data-theme="midnight"] {
+    --bg-color: #0a0e27;
+    --bg-gradient: radial-gradient(circle at 30% 20%, #0f1a4a, #0a0e27 60%, #050818 100%);
+    --card-bg: rgba(15, 23, 60, 0.7);
+    --card-border: rgba(218, 165, 32, 0.25);
+    --card-blur: 20px;
+    --text-main: #e8e6f0;
+    --text-muted: #8b8fa8;
+    --primary: #daa520;
+    --primary-hover: #c4941d;
+    --primary-glow: rgba(218, 165, 32, 0.5);
+    --secondary: #5b7fff;
+    --secondary-glow: rgba(91, 127, 255, 0.5);
+    --danger: #ff4757;
+    --danger-hover: #cc3945;
+    --success: #2ed573;
+    --warning: #ffa502;
+}
+
+[data-theme="midnight"] body {
+    background-image:
+        linear-gradient(rgba(218, 165, 32, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(218, 165, 32, 0.02) 1px, transparent 1px),
+        var(--bg-gradient);
+}
+
+[data-theme="midnight"] .glass-panel {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(218, 165, 32, 0.03);
+}
+
+[data-theme="midnight"] .glass-panel:hover {
+    border-color: rgba(218, 165, 32, 0.4);
+    box-shadow: 0 0 20px rgba(218, 165, 32, 0.1), inset 0 0 15px rgba(218, 165, 32, 0.05);
+}
+
+[data-theme="midnight"] .card {
+    background: linear-gradient(135deg, rgba(15, 23, 60, 0.8), rgba(10, 14, 39, 0.9));
+    border-color: var(--card-border);
+}
+
+[data-theme="midnight"] .card::before {
+    background: linear-gradient(to right, transparent, rgba(218, 165, 32, 0.08), transparent);
+}
+
+[data-theme="midnight"] .card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px var(--primary-glow);
+}
+
+[data-theme="midnight"] .tab-btn.active {
+    color: var(--primary);
+    background: rgba(218, 165, 32, 0.1);
+    box-shadow: inset 0 0 20px rgba(218, 165, 32, 0.08);
+    text-shadow: 0 0 8px var(--primary-glow);
+}
+
+[data-theme="midnight"] .brand-logo {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+[data-theme="midnight"] .btn-primary {
+    background: rgba(218, 165, 32, 0.1);
+    color: var(--primary);
+    border-color: var(--primary);
+    box-shadow: 0 0 10px var(--primary-glow), inset 0 0 5px var(--primary-glow);
+}
+
+[data-theme="midnight"] .btn-primary:hover {
+    background: var(--primary);
+    color: #0a0e27;
+    box-shadow: 0 0 25px var(--primary-glow);
+}
+
+[data-theme="midnight"] .income-card .card-icon {
+    background: rgba(46, 213, 115, 0.15);
+    color: var(--success);
+}
+
+[data-theme="midnight"] .expense-card .card-icon {
+    background: rgba(255, 71, 87, 0.15);
+    color: var(--danger);
+}
+
+[data-theme="midnight"] .balance-card .card-icon {
+    background: rgba(91, 127, 255, 0.15);
+    color: var(--secondary);
+}
+
+[data-theme="midnight"] .auth-box {
+    background: rgba(15, 23, 60, 0.8);
+    border-color: rgba(218, 165, 32, 0.15);
+}
+
+/* ---------- THEME: Natureza ---------- */
+[data-theme="nature"] {
+    --bg-color: #0d1f0d;
+    --bg-gradient: radial-gradient(circle at 50% 0%, #1a3a1a, #0d1f0d 60%, #060f06 100%);
+    --card-bg: rgba(13, 31, 13, 0.65);
+    --card-border: rgba(76, 175, 80, 0.25);
+    --card-blur: 16px;
+    --text-main: #d4e8d4;
+    --text-muted: #8aab8a;
+    --primary: #4caf50;
+    --primary-hover: #43a047;
+    --primary-glow: rgba(76, 175, 80, 0.5);
+    --secondary: #a1887f;
+    --secondary-glow: rgba(161, 136, 127, 0.5);
+    --danger: #e53935;
+    --danger-hover: #c62828;
+    --success: #66bb6a;
+    --warning: #ffb74d;
+    --border-radius: 16px;
+    --btn-radius: 10px;
+}
+
+[data-theme="nature"] body {
+    background-image:
+        linear-gradient(rgba(76, 175, 80, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(76, 175, 80, 0.02) 1px, transparent 1px),
+        var(--bg-gradient);
+}
+
+[data-theme="nature"] .glass-panel {
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(76, 175, 80, 0.04);
+}
+
+[data-theme="nature"] .glass-panel:hover {
+    border-color: rgba(76, 175, 80, 0.4);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.1), inset 0 0 15px rgba(76, 175, 80, 0.06);
+}
+
+[data-theme="nature"] .card {
+    background: linear-gradient(135deg, rgba(20, 40, 20, 0.8), rgba(10, 20, 10, 0.9));
+    border-color: var(--card-border);
+    border-radius: 20px;
+}
+
+[data-theme="nature"] .card::before {
+    background: linear-gradient(to right, transparent, rgba(76, 175, 80, 0.08), transparent);
+}
+
+[data-theme="nature"] .card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px var(--primary-glow);
+}
+
+[data-theme="nature"] .tab-btn {
+    border-radius: 12px;
+}
+
+[data-theme="nature"] .tab-btn.active {
+    color: var(--primary);
+    background: rgba(76, 175, 80, 0.1);
+    box-shadow: inset 0 0 20px rgba(76, 175, 80, 0.08);
+    text-shadow: 0 0 8px var(--primary-glow);
+}
+
+[data-theme="nature"] .brand-logo {
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+[data-theme="nature"] .btn-primary {
+    background: rgba(76, 175, 80, 0.12);
+    color: var(--primary);
+    border-color: var(--primary);
+    border-radius: 12px;
+    box-shadow: 0 0 10px var(--primary-glow), inset 0 0 5px var(--primary-glow);
+}
+
+[data-theme="nature"] .btn-primary:hover {
+    background: var(--primary);
+    color: #0d1f0d;
+    box-shadow: 0 0 25px var(--primary-glow);
+}
+
+[data-theme="nature"] .btn-secondary {
+    border-radius: 12px;
+}
+
+[data-theme="nature"] .income-card .card-icon {
+    background: rgba(102, 187, 106, 0.15);
+    color: var(--success);
+}
+
+[data-theme="nature"] .expense-card .card-icon {
+    background: rgba(229, 57, 53, 0.15);
+    color: var(--danger);
+}
+
+[data-theme="nature"] .balance-card .card-icon {
+    background: rgba(161, 136, 127, 0.15);
+    color: var(--secondary);
+}
+
+[data-theme="nature"] .credit-card {
+    border-radius: 20px;
+}
+
+[data-theme="nature"] .form-group input,
+[data-theme="nature"] .form-group select {
+    border-radius: 10px;
+}
+
+[data-theme="nature"] .auth-box {
+    background: rgba(13, 31, 13, 0.8);
+    border-color: rgba(76, 175, 80, 0.15);
+    border-radius: 24px;
+}
+
+[data-theme="nature"] .month-nav-buttons button {
+    border-radius: 12px;
+}
+
+[data-theme="nature"] .modal-content {
+    border-radius: 24px;
+}
+
+/* ===============================================
+   LAYOUT VARIATIONS
+   =============================================== */
+
+/* --- Layout: Stacked (Clássico Claro) --- */
+[data-layout="stacked"] .app-container {
+    max-width: 900px;
+}
+
+[data-layout="stacked"] .grid-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+[data-layout="stacked"] .summary-cards {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* --- Layout: Sidebar (Midnight Blue) --- */
+[data-layout="sidebar"] .app-container {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 0;
+    padding: 0;
+}
+
+[data-layout="sidebar"] header.glass-panel {
+    grid-column: 1;
+    grid-row: 1 / 4;
+    border-radius: 0;
+    min-height: 100vh;
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    align-self: start;
+}
+
+[data-layout="sidebar"] .header-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+[data-layout="sidebar"] .logo {
+    justify-content: center;
+}
+
+[data-layout="sidebar"] .app-header-actions {
+    justify-content: center;
+}
+
+[data-layout="sidebar"] .month-selector {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+}
+
+[data-layout="sidebar"] .month-selector h2 {
+    font-size: 1.15rem;
+    order: 1;
+}
+
+[data-layout="sidebar"] .month-nav-buttons {
+    order: 2;
+    justify-content: center;
+}
+
+[data-layout="sidebar"] .summary-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+[data-layout="sidebar"] .card-info p {
+    font-size: 1.15rem;
+}
+
+[data-layout="sidebar"] .card-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
+    margin-right: 0.75rem;
+}
+
+[data-layout="sidebar"] .tabs-container {
+    padding: 1.5rem 2rem 0;
+}
+
+[data-layout="sidebar"] .main-content {
+    padding: 0 2rem 2rem;
+}
+
+[data-layout="sidebar"] .grid-layout {
+    grid-template-columns: 380px 1fr;
+}
+
+/* --- Layout: Organic (Natureza) --- */
+[data-layout="organic"] .app-container {
+    max-width: 1300px;
+}
+
+[data-layout="organic"] .summary-cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+[data-layout="organic"] .card {
+    padding: 2rem;
+}
+
+[data-layout="organic"] .grid-layout {
+    grid-template-columns: 380px 1fr;
+    gap: 2.5rem;
+}
+
+[data-layout="organic"] .glass-panel {
+    padding: 2rem;
+}
+
+/* ===============================================
+   THEME SWITCHER UI
+   =============================================== */
+.theme-switcher {
+    position: relative;
+}
+
+.theme-switcher-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--card-border);
+    color: var(--text-muted);
+    padding: 0.4rem 0.7rem;
+    border-radius: var(--btn-radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: all 0.3s;
+}
+
+[data-theme="light"] .theme-switcher-btn {
+    background: #f1f5f9;
+    border-color: #e2e8f0;
+    color: var(--text-main);
+}
+
+.theme-switcher-btn:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.theme-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+    min-width: 220px;
+    z-index: 200;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="light"] .theme-dropdown {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.theme-dropdown.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.theme-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 0.9rem;
+    width: 100%;
+    text-align: left;
+    transition: all 0.2s;
+}
+
+.theme-option:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .theme-option:hover {
+    background: rgba(59, 130, 246, 0.06);
+}
+
+.theme-option.active {
+    background: rgba(255, 255, 255, 0.1);
+    outline: 1px solid var(--primary);
+}
+
+.theme-option-colors {
+    display: flex;
+    gap: 3px;
+    flex-shrink: 0;
+}
+
+.theme-option-colors span {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: block;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.theme-option-name {
+    font-weight: 500;
+}
+
+/* Sidebar layout responsive */
+@media (max-width: 1024px) {
+    [data-layout="sidebar"] .app-container {
+        grid-template-columns: 1fr;
+    }
+
+    [data-layout="sidebar"] header.glass-panel {
+        grid-column: 1;
+        grid-row: auto;
+        min-height: auto;
+        position: relative;
+        border-radius: var(--border-radius);
+    }
+
+    [data-layout="sidebar"] .header-content {
+        flex-direction: row;
+    }
+
+    [data-layout="sidebar"] .summary-cards {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    [data-layout="sidebar"] .tabs-container,
+    [data-layout="sidebar"] .main-content {
+        padding: 0;
+    }
+}
+
 /* --------------- AUTH SCREEN --------------- */
 #auth-container {
     min-height: 100vh;

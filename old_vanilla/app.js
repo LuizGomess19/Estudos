@@ -49,6 +49,11 @@ auth.onAuthStateChanged((user) => {
                 incomes = data.incomes || {};
                 defaultIncome = parseFloat(data.defaultIncome) || 0;
 
+                // Load user theme from Firebase
+                if (data.theme) {
+                    applyTheme(data.theme);
+                }
+
                 // Backup local extra
                 localStorage.setItem('expenses', JSON.stringify(expenses));
                 localStorage.setItem('cards', JSON.stringify(cards));
@@ -107,6 +112,49 @@ const bankLogos = {
     'c6': 'https://logo.clearbit.com/c6bank.com.br',
     'outros': 'https://logo.clearbit.com/visa.com'
 };
+
+// ================= THEME SYSTEM =================
+const THEMES = {
+    'cyberpunk': { layout: 'default' },
+    'light': { layout: 'stacked' },
+    'midnight': { layout: 'sidebar' },
+    'nature': { layout: 'organic' }
+};
+
+let currentTheme = localStorage.getItem('selectedTheme') || 'cyberpunk';
+
+function applyTheme(themeName) {
+    if (!THEMES[themeName]) themeName = 'cyberpunk';
+    currentTheme = themeName;
+
+    const html = document.documentElement;
+
+    // Reset all theme/layout attributes
+    if (themeName === 'cyberpunk') {
+        html.removeAttribute('data-theme');
+        html.removeAttribute('data-layout');
+    } else {
+        html.setAttribute('data-theme', themeName);
+        html.setAttribute('data-layout', THEMES[themeName].layout);
+    }
+
+    // Update active state on dropdown buttons
+    document.querySelectorAll('.theme-option').forEach(opt => {
+        opt.classList.toggle('active', opt.dataset.theme === themeName);
+    });
+
+    // Save locally
+    localStorage.setItem('selectedTheme', themeName);
+
+    // Save to Firebase if logged in
+    if (currentUser) {
+        database.ref('/users/' + currentUser.uid + '/theme').set(themeName);
+    }
+}
+
+// Apply saved theme immediately on load (before DOMContentLoaded to avoid flash)
+applyTheme(currentTheme);
+// ================================================
 
 document.addEventListener('DOMContentLoaded', () => {
     // Initial dates
@@ -183,6 +231,31 @@ document.addEventListener('DOMContentLoaded', () => {
         auth.signOut();
     });
 
+    // Theme Switcher Listeners
+    const themeSwitcherBtn = document.getElementById('theme-switcher-btn');
+    const themeDropdown = document.getElementById('theme-dropdown');
+
+    if (themeSwitcherBtn && themeDropdown) {
+        themeSwitcherBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            themeDropdown.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.theme-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                applyTheme(opt.dataset.theme);
+                themeDropdown.classList.remove('open');
+            });
+        });
+
+        // Close dropdown on click outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.theme-switcher')) {
+                themeDropdown.classList.remove('open');
+            }
+        });
+    }
+
     // Initialize Interactive Background
     initInteractiveBackground();
 
@@ -254,7 +327,8 @@ function saveData() {
             cards: cards,
             cardExpenses: cardExpenses,
             incomes: incomes,
-            defaultIncome: defaultIncome
+            defaultIncome: defaultIncome,
+            theme: currentTheme
         });
     }
 }
@@ -626,8 +700,22 @@ function initInteractiveBackground() {
 
     resize();
 
+    function getParticleColors() {
+        const themes = {
+            'cyberpunk': { line: [0, 240, 255], node: [188, 19, 254] },
+            'light': { line: [59, 130, 246], node: [139, 92, 246] },
+            'midnight': { line: [218, 165, 32], node: [91, 127, 255] },
+            'nature': { line: [76, 175, 80], node: [161, 136, 127] }
+        };
+        return themes[currentTheme] || themes['cyberpunk'];
+    }
+
     function animate() {
         ctx.clearRect(0, 0, width, height);
+
+        const colors = getParticleColors();
+        const isLight = currentTheme === 'light';
+        const alphaMultiplier = isLight ? 0.3 : 1;
 
         particles.forEach(p => {
             // Move
@@ -645,29 +733,23 @@ function initInteractiveBackground() {
             const dy = mouse.y - p.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
 
-            let alpha = p.baseAlpha;
+            let alpha = p.baseAlpha * alphaMultiplier;
             if (dist < 180) {
-                alpha += (180 - dist) / 180 * 0.9;
+                alpha += (180 - dist) / 180 * 0.9 * alphaMultiplier;
 
-                // Cyberpunk data lines connecting to mouse
                 ctx.beginPath();
                 ctx.moveTo(p.x, p.y);
-                // Draw rigid/tech-looking angled lines rather than direct straight lines
-                // or just straight sharp lines with neon color
                 ctx.lineTo(mouse.x, mouse.y);
-                ctx.strokeStyle = `rgba(0, 240, 255, ${((180 - dist) / 180) * 0.4})`;
+                ctx.strokeStyle = `rgba(${colors.line[0]}, ${colors.line[1]}, ${colors.line[2]}, ${((180 - dist) / 180) * 0.4 * alphaMultiplier})`;
                 ctx.lineWidth = 1.5;
                 ctx.stroke();
             }
 
-            // Draw tech elements (small squares/nodes) instead of circles
-            ctx.fillStyle = `rgba(188, 19, 254, ${alpha})`;
+            ctx.fillStyle = `rgba(${colors.node[0]}, ${colors.node[1]}, ${colors.node[2]}, ${alpha})`;
             if (p.radius > 2) {
-                // Draw a cross/target node for larger particles
                 ctx.fillRect(p.x - p.radius, p.y - 1, p.radius * 2, 2);
                 ctx.fillRect(p.x - 1, p.y - p.radius, 2, p.radius * 2);
             } else {
-                // Draw standard square data node
                 ctx.fillRect(p.x - p.radius, p.y - p.radius, p.radius * 2, p.radius * 2);
             }
         });
