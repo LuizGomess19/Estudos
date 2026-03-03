@@ -295,6 +295,250 @@
     border-radius: 26px;
 }
 
+/* ---------- Dracula ---------- */
+[data-theme="dracula"] {
+    --bg: #282a36;
+    --bg-grad: radial-gradient(ellipse at 50% 0%, #3a3d52, #282a36 55%, #1e1f2e);
+    --surface: rgba(40, 42, 54, 0.75);
+    --border: rgba(189, 147, 249, 0.2);
+    --border-hover: rgba(189, 147, 249, 0.45);
+    --text: #f8f8f2;
+    --text-dim: #6272a4;
+    --accent: #bd93f9;
+    --accent-glow: rgba(189, 147, 249, 0.45);
+    --accent2: #ff79c6;
+    --accent2-glow: rgba(255, 121, 198, 0.45);
+    --danger: #ff5555;
+    --success: #50fa7b;
+    --warn: #f1fa8c;
+}
+
+[data-theme="dracula"] body {
+    background-image:
+        linear-gradient(rgba(189, 147, 249, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(189, 147, 249, 0.015) 1px, transparent 1px),
+        var(--bg-grad);
+}
+
+[data-theme="dracula"] .stat-card {
+    background: linear-gradient(135deg, rgba(40, 42, 54, 0.9), rgba(30, 31, 46, 0.95));
+}
+
+[data-theme="dracula"] .stat-income .stat-icon {
+    background: rgba(80, 250, 123, 0.12);
+    color: var(--success);
+}
+
+[data-theme="dracula"] .stat-expense .stat-icon {
+    background: rgba(255, 85, 85, 0.12);
+    color: var(--danger);
+}
+
+[data-theme="dracula"] .stat-balance .stat-icon {
+    background: rgba(255, 121, 198, 0.12);
+    color: var(--accent2);
+}
+
+[data-theme="dracula"] .btn-primary {
+    background: rgba(189, 147, 249, 0.08);
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+}
+
+[data-theme="dracula"] .btn-primary:hover {
+    background: var(--accent);
+    color: #282a36;
+}
+
+[data-theme="dracula"] .auth-card {
+    background: rgba(40, 42, 54, 0.85);
+    border-color: rgba(189, 147, 249, 0.12);
+}
+
+/* ---------- Rose Gold ---------- */
+[data-theme="rosegold"] {
+    --bg: #1a1015;
+    --bg-grad: radial-gradient(ellipse at 50% 0%, #2d1a24, #1a1015 55%, #120a0e);
+    --surface: rgba(26, 16, 21, 0.7);
+    --border: rgba(232, 160, 191, 0.2);
+    --border-hover: rgba(232, 160, 191, 0.45);
+    --text: #f0dde4;
+    --text-dim: #a07888;
+    --accent: #e8a0bf;
+    --accent-glow: rgba(232, 160, 191, 0.4);
+    --accent2: #c97b9a;
+    --accent2-glow: rgba(201, 123, 154, 0.4);
+    --danger: #e84057;
+    --success: #5de0a3;
+    --warn: #f0c77d;
+}
+
+[data-theme="rosegold"] body {
+    background-image:
+        linear-gradient(rgba(232, 160, 191, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232, 160, 191, 0.015) 1px, transparent 1px),
+        var(--bg-grad);
+}
+
+[data-theme="rosegold"] .stat-card {
+    background: linear-gradient(135deg, rgba(35, 20, 28, 0.9), rgba(20, 12, 16, 0.95));
+}
+
+[data-theme="rosegold"] .stat-income .stat-icon {
+    background: rgba(93, 224, 163, 0.12);
+    color: var(--success);
+}
+
+[data-theme="rosegold"] .stat-expense .stat-icon {
+    background: rgba(232, 64, 87, 0.12);
+    color: var(--danger);
+}
+
+[data-theme="rosegold"] .stat-balance .stat-icon {
+    background: rgba(201, 123, 154, 0.12);
+    color: var(--accent2);
+}
+
+[data-theme="rosegold"] .btn-primary {
+    background: rgba(232, 160, 191, 0.08);
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+}
+
+[data-theme="rosegold"] .btn-primary:hover {
+    background: var(--accent);
+    color: #1a1015;
+}
+
+[data-theme="rosegold"] .auth-card {
+    background: rgba(26, 16, 21, 0.85);
+    border-color: rgba(232, 160, 191, 0.12);
+}
+
+/* ---------- Oceano ---------- */
+[data-theme="ocean"] {
+    --bg: #0a1628;
+    --bg-grad: radial-gradient(ellipse at 50% 10%, #0c2a4a, #0a1628 55%, #060e1a);
+    --surface: rgba(10, 22, 40, 0.7);
+    --border: rgba(14, 165, 233, 0.2);
+    --border-hover: rgba(14, 165, 233, 0.45);
+    --text: #d0e8f5;
+    --text-dim: #5a8aaa;
+    --accent: #0ea5e9;
+    --accent-glow: rgba(14, 165, 233, 0.45);
+    --accent2: #06b6d4;
+    --accent2-glow: rgba(6, 182, 212, 0.45);
+    --danger: #f43f5e;
+    --success: #34d399;
+    --warn: #fbbf24;
+}
+
+[data-theme="ocean"] body {
+    background-image:
+        linear-gradient(rgba(14, 165, 233, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(14, 165, 233, 0.015) 1px, transparent 1px),
+        var(--bg-grad);
+}
+
+[data-theme="ocean"] .stat-card {
+    background: linear-gradient(135deg, rgba(10, 22, 40, 0.9), rgba(6, 14, 26, 0.95));
+}
+
+[data-theme="ocean"] .stat-income .stat-icon {
+    background: rgba(52, 211, 153, 0.12);
+    color: var(--success);
+}
+
+[data-theme="ocean"] .stat-expense .stat-icon {
+    background: rgba(244, 63, 94, 0.12);
+    color: var(--danger);
+}
+
+[data-theme="ocean"] .stat-balance .stat-icon {
+    background: rgba(6, 182, 212, 0.12);
+    color: var(--accent2);
+}
+
+[data-theme="ocean"] .btn-primary {
+    background: rgba(14, 165, 233, 0.08);
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+}
+
+[data-theme="ocean"] .btn-primary:hover {
+    background: var(--accent);
+    color: #0a1628;
+}
+
+[data-theme="ocean"] .auth-card {
+    background: rgba(10, 22, 40, 0.85);
+    border-color: rgba(14, 165, 233, 0.12);
+}
+
+/* ---------- Pôr do Sol ---------- */
+[data-theme="sunset"] {
+    --bg: #1a0a0a;
+    --bg-grad: radial-gradient(ellipse at 50% 0%, #3a1515, #1a0a0a 55%, #0f0505);
+    --surface: rgba(26, 10, 10, 0.7);
+    --border: rgba(249, 115, 22, 0.2);
+    --border-hover: rgba(249, 115, 22, 0.45);
+    --text: #f5e0d0;
+    --text-dim: #aa7a5a;
+    --accent: #f97316;
+    --accent-glow: rgba(249, 115, 22, 0.45);
+    --accent2: #ef4444;
+    --accent2-glow: rgba(239, 68, 68, 0.45);
+    --danger: #dc2626;
+    --success: #4ade80;
+    --warn: #facc15;
+}
+
+[data-theme="sunset"] body {
+    background-image:
+        linear-gradient(rgba(249, 115, 22, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(249, 115, 22, 0.015) 1px, transparent 1px),
+        var(--bg-grad);
+}
+
+[data-theme="sunset"] .stat-card {
+    background: linear-gradient(135deg, rgba(30, 12, 12, 0.9), rgba(15, 5, 5, 0.95));
+}
+
+[data-theme="sunset"] .stat-income .stat-icon {
+    background: rgba(74, 222, 128, 0.12);
+    color: var(--success);
+}
+
+[data-theme="sunset"] .stat-expense .stat-icon {
+    background: rgba(220, 38, 38, 0.12);
+    color: var(--danger);
+}
+
+[data-theme="sunset"] .stat-balance .stat-icon {
+    background: rgba(239, 68, 68, 0.12);
+    color: var(--accent2);
+}
+
+[data-theme="sunset"] .btn-primary {
+    background: rgba(249, 115, 22, 0.08);
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+}
+
+[data-theme="sunset"] .btn-primary:hover {
+    background: var(--accent);
+    color: #1a0a0a;
+}
+
+[data-theme="sunset"] .auth-card {
+    background: rgba(26, 10, 10, 0.85);
+    border-color: rgba(249, 115, 22, 0.12);
+}
+
 /* ===================================================
    Layout Variants
    =================================================== */
