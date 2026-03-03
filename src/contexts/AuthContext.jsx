@@ -22,6 +22,11 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         let dbRef = null
 
+        // Timeout de segurança: se o Firebase demorar mais de 10s, para de carregar
+        const safetyTimeout = setTimeout(() => {
+            setLoading(false)
+        }, 10000)
+
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
                 setCurrentUser(user)
@@ -39,6 +44,12 @@ export function AuthProvider({ children }) {
                             theme: d.theme || 'cyberpunk'
                         })
                     }
+                    clearTimeout(safetyTimeout)
+                    setLoading(false)
+                }, (error) => {
+                    // Se o Database falhar, ainda assim para de carregar
+                    console.error('Erro ao conectar ao Firebase Database:', error)
+                    clearTimeout(safetyTimeout)
                     setLoading(false)
                 })
             } else {
@@ -52,11 +63,13 @@ export function AuthProvider({ children }) {
                     theme: 'cyberpunk'
                 })
                 if (dbRef) dbRef.off()
+                clearTimeout(safetyTimeout)
                 setLoading(false)
             }
         })
 
         return () => {
+            clearTimeout(safetyTimeout)
             unsubscribe()
             if (dbRef) dbRef.off()
         }
