@@ -17,6 +17,14 @@ function Dashboard() {
     const [incomeModal, setIncomeModal] = useState(false)
     const [cardModal, setCardModal] = useState(false)
     const [cardExpenseModal, setCardExpenseModal] = useState(false)
+    const [editExpenseModal, setEditExpenseModal] = useState(false)
+
+    // Edit expense states
+    const [editId, setEditId] = useState(null)
+    const [editDesc, setEditDesc] = useState('')
+    const [editAmount, setEditAmount] = useState('')
+    const [editCategory, setEditCategory] = useState('alimentacao')
+    const [editDate, setEditDate] = useState('')
 
     // Modal form states
     const [incomeInput, setIncomeInput] = useState('')
@@ -44,7 +52,7 @@ function Dashboard() {
     // Cash expenses
     const monthlyExpenses = (data.expenses || [])
         .filter(exp => exp.monthKey === key)
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .sort((a, b) => Number(a.id) - Number(b.id))
     const totalCash = monthlyExpenses.reduce((s, e) => s + e.amount, 0)
 
     // Card invoices
@@ -68,6 +76,26 @@ function Dashboard() {
     function deleteExpense(id) {
         if (!confirm('Apagar gasto à vista?')) return
         saveData({ ...data, expenses: data.expenses.filter(e => e.id !== id) })
+    }
+
+    function openEditExpense(exp) {
+        setEditId(exp.id)
+        setEditDesc(exp.desc)
+        setEditAmount(String(exp.amount))
+        setEditCategory(exp.category)
+        setEditDate(exp.date)
+        setEditExpenseModal(true)
+    }
+
+    function handleEditExpense(e) {
+        e.preventDefault()
+        const updatedExpenses = (data.expenses || []).map(exp =>
+            exp.id === editId
+                ? { ...exp, desc: editDesc, amount: parseFloat(editAmount), category: editCategory, date: editDate, monthKey: editDate.substring(0, 7) }
+                : exp
+        )
+        saveData({ ...data, expenses: updatedExpenses })
+        setEditExpenseModal(false)
     }
 
     function handleSetIncome(e) {
@@ -165,7 +193,7 @@ function Dashboard() {
                 {activeTab === 'cash' && (
                     <div className="tab-cash">
                         <ExpenseForm onAdd={addExpense} />
-                        <ExpensesTable expenses={monthlyExpenses} totalOverall={totalExpense} onDelete={deleteExpense} />
+                        <ExpensesTable expenses={monthlyExpenses} totalOverall={totalExpense} onDelete={deleteExpense} onEdit={openEditExpense} />
                     </div>
                 )}
 
@@ -277,6 +305,40 @@ function Dashboard() {
                     <div className="modal-btns">
                         <button type="button" className="btn-secondary" onClick={() => setCardExpenseModal(false)}>Cancelar</button>
                         <button type="submit" className="btn-primary">Adicionar</button>
+                    </div>
+                </form>
+            </Modal>
+
+            {/* Edit Expense Modal */}
+            <Modal open={editExpenseModal} onClose={() => setEditExpenseModal(false)} title="Editar Gasto" icon="fa-solid fa-pen-to-square">
+                <form onSubmit={handleEditExpense}>
+                    <div className="field">
+                        <label>Descrição</label>
+                        <input value={editDesc} onChange={e => setEditDesc(e.target.value)} required />
+                    </div>
+                    <div className="field">
+                        <label>Valor (R$)</label>
+                        <input type="number" step="0.01" min="0" value={editAmount} onChange={e => setEditAmount(e.target.value)} required />
+                    </div>
+                    <div className="field">
+                        <label>Categoria</label>
+                        <select value={editCategory} onChange={e => setEditCategory(e.target.value)}>
+                            <option value="alimentacao">🍏 Alimentação</option>
+                            <option value="transporte">🚗 Transporte</option>
+                            <option value="moradia">🏠 Moradia</option>
+                            <option value="lazer">🎉 Lazer</option>
+                            <option value="saude">💊 Saúde</option>
+                            <option value="educacao">📚 Educação</option>
+                            <option value="outros">🛒 Outros</option>
+                        </select>
+                    </div>
+                    <div className="field">
+                        <label>Data</label>
+                        <input type="date" value={editDate} onChange={e => setEditDate(e.target.value)} required />
+                    </div>
+                    <div className="modal-btns">
+                        <button type="button" className="btn-secondary" onClick={() => setEditExpenseModal(false)}>Cancelar</button>
+                        <button type="submit" className="btn-primary">Salvar</button>
                     </div>
                 </form>
             </Modal>

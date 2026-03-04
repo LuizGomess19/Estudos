@@ -2,7 +2,7 @@ function fmt(v) {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v)
 }
 
-export default function ExpensesTable({ expenses, totalOverall, onDelete }) {
+export default function ExpensesTable({ expenses, totalOverall, onDelete, onEdit }) {
     if (expenses.length === 0) {
         return (
             <section className="glass-panel table-section">
@@ -42,7 +42,10 @@ export default function ExpensesTable({ expenses, totalOverall, onDelete }) {
                                     <td>{fmt(exp.amount)}</td>
                                     <td>{pct}</td>
                                     <td>
-                                        <button className="btn-delete" onClick={() => onDelete(exp.id)}>
+                                        <button className="btn-edit" onClick={() => onEdit(exp)} title="Editar">
+                                            <i className="fa-solid fa-pen-to-square" />
+                                        </button>
+                                        <button className="btn-delete" onClick={() => onDelete(exp.id)} title="Excluir">
                                             <i className="fa-solid fa-trash" />
                                         </button>
                                     </td>
